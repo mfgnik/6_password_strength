@@ -1,6 +1,17 @@
 # Password Strength Calculator
 
-[TODO. There will be project description]
+Script gets your password and evaluates its difficulty
+
+# Quickstart
+
+Example of script launch on Mac OS:
+
+```bash
+python password.py your_password
+
+Output:
+4
+```
 
 # Project Goals
 
