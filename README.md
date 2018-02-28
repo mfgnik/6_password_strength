@@ -7,10 +7,12 @@ Script gets your password and evaluates its difficulty.
 Example of script launch on Mac OS:
 
 ```bash
+python password_strength.py
+Password:
 
-python password_strength.py your_password
+Output:
 
-Output: 4
+Password strength: 4
 ```
 
 # Project Goals
