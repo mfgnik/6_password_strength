@@ -1,4 +1,5 @@
 import sys
+import re
 
 
 def count_upper_letters(password):
@@ -47,18 +48,12 @@ def count_repeats_of_letters(password):
     sum_of_repeats = 0
     max_repeat = 0
     number_of_letter = 0
-    while number_of_letter < len(password) - 1:
-        if password[number_of_letter] == password[number_of_letter + 1]:
-            repeat_now = 1
-            while password[number_of_letter] == password[number_of_letter + 1]:
-                repeat_now += 1
-                number_of_letter += 1
-                if number_of_letter == len(password) - 1:
-                    break
-            sum_of_repeats += repeat_now
-            if max_repeat < repeat_now:
-                max_repeat = repeat_now
-        number_of_letter += 1
+    for repeat in re.finditer(r'(.)\1+', password):
+        start, end = repeat.span()
+        length_of_repeat = end - start
+        sum_of_repeats += length_of_repeat
+        if length_of_repeat > max_repeat:
+            max_repeat = length_of_repeat
     return sum_of_repeats * 2 + max_repeat * 3
 
 
