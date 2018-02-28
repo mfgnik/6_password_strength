@@ -47,7 +47,6 @@ def count_symbols(password):
 def count_repeats_of_letters(password):
     sum_of_repeats = 0
     max_repeat = 0
-    number_of_letter = 0
     for repeat in re.finditer(r'(.)\1+', password):
         start, end = repeat.span()
         length_of_repeat = end - start
