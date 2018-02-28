@@ -1,4 +1,4 @@
-import sys
+import getpass
 import re
 
 
@@ -56,7 +56,7 @@ def count_repeats_of_letters(password):
     return sum_of_repeats * 2 + max_repeat * 3
 
 
-def additions(password):
+def good_criteria(password):
     number_of_characters = len(password) * 4
     upper_letters = (len(password) - count_upper_letters(password)) * 2
     lower_letters = (len(password) - count_lower_letters(password)) * 2
@@ -68,7 +68,7 @@ def additions(password):
     return number_of_characters + type_criteria + requirements
 
 
-def deductions(password):
+def bad_criteria(password):
     numbers_only = (password.isdigit())
     upper_only = (password.isupper() and password.isalpha())
     lower_only = (password.islower() and password.isalpha())
@@ -83,15 +83,10 @@ def deductions(password):
 
 
 def get_password_strength(password):
-    criteria = additions(password) - deductions(password)
-    if criteria < 20:
-        return 1
-    if criteria > 99:
-        return 10
-    else:
-        return criteria // 10
+    criteria = (good_criteria(password) - bad_criteria(password)) // 10
+    return min(max(1, criteria), 10)
 
 
 if __name__ == '__main__':
-    password = sys.argv[1]
-    print(get_password_strength(password))
+    password = getpass.getpass()
+    print('Password strength:', get_password_strength(password))
