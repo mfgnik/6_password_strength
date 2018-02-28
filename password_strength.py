@@ -1,47 +1,22 @@
 import getpass
 import re
+import string
 
 
 def count_upper_letters(password):
-    amount_of_upper_letters = 0
-    eng_upper_letters = set(chr(index) for index in range(65, 91))
-    rus_upper_letters = set(chr(index) for index in range(1040, 1072)) | {'Ё'}
-    upper_letters = eng_upper_letters | rus_upper_letters
-    for letter in password:
-        if letter in upper_letters:
-            amount_of_upper_letters += 1
-    return amount_of_upper_letters
+    return len([char for char in password if char.isupper()])
 
 
 def count_lower_letters(password):
-    amount_of_lower_letters = 0
-    eng_lower_letters = set(chr(index) for index in range(97, 123))
-    rus_lower_letters = set(chr(index) for index in range(1072, 1104)) | {'ё'}
-    lower_letters = eng_lower_letters | rus_lower_letters
-    for letter in password:
-        if letter in lower_letters:
-            amount_of_lower_letters += 1
-    return amount_of_lower_letters
+    return len([char for char in password if char.islower()])
 
 
 def count_numbers(password):
-    amount_of_numbers = 0
-    numbers = set(chr(index) for index in range(48, 58))
-    for letter in password:
-        if letter in numbers:
-            amount_of_numbers += 1
-    return amount_of_numbers
+    return len([char for char in password if char.islower()])
 
 
 def count_symbols(password):
-    amount_of_symbols = 0
-    first_group_of_symbols = set(chr(index) for index in range(33, 48))
-    second_group_of_symbols = set(chr(index) for index in range(58, 65))
-    symbols = first_group_of_symbols | second_group_of_symbols
-    for letter in password:
-        if letter in symbols:
-            amount_of_symbols += 1
-    return amount_of_symbols
+    return len([char for char in password if char in string.punctuation])
 
 
 def repeat_criteria(password):
