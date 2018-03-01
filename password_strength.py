@@ -12,14 +12,14 @@ def count_lower_letters(password):
 
 
 def count_numbers(password):
-    return len([char for char in password if char.islower()])
+    return len([char for char in password if char.isdigit()])
 
 
 def count_symbols(password):
     return len([char for char in password if char in string.punctuation])
 
 
-def repeat_criteria(password):
+def get_repeat_criteria(password):
     sum_coefficient = 2
     max_coefficient = 3
     sum_of_repeats = 0
@@ -38,12 +38,12 @@ def repeat_criteria(password):
 def good_criteria(password):
     len_coefficient = 2
     number_of_characters = len(password) * len_coefficient
-    letter_coefficient = 2
+    letter_coefficient = 3
     upper_letters = len(password) - count_upper_letters(password)
     upper_letters *= letter_coefficient
     lower_letters = len(password) - count_lower_letters(password)
     lower_letters *= letter_coefficient
-    number_coefficient = 3
+    number_coefficient = 4
     numbers = count_numbers(password) * number_coefficient
     symbol_coefficient = 6
     symbols = count_symbols(password) * symbol_coefficient
@@ -56,23 +56,23 @@ def good_criteria(password):
 
 
 def bad_criteria(password):
-    numbers_only = int(password.isdigit())
-    upper_only = int(password.isupper() and password.isalpha())
-    lower_only = int(password.islower() and password.isalpha())
+    numbers_only = password.isdigit()
+    upper_only = password.isupper() and password.isalpha()
+    lower_only = password.islower() and password.isalpha()
     only_coefficient = 8
     only_criteria = (numbers_only + upper_only + lower_only)
     only_criteria *= only_coefficient
     not_coefficient = 8
-    not_numbers = int(not count_numbers(password))
-    not_upper = int(not count_upper_letters(password))
-    not_lower = int(not count_lower_letters(password))
-    not_symbols = int(not count_symbols(password))
+    not_numbers = not count_numbers(password)
+    not_upper = not count_upper_letters(password)
+    not_lower = not count_lower_letters(password)
+    not_symbols = not count_symbols(password)
     not_numbers *= not_coefficient
     not_upper *= not_coefficient
     not_lower *= not_coefficient
     not_symbols *= not_coefficient
     not_criteria = not_numbers + not_upper + not_lower + not_symbols
-    repeats_of_letters = repeat_criteria(password)
+    repeats_of_letters = get_repeat_criteria(password)
     return only_criteria * len(password) + not_criteria + repeats_of_letters
 
 
